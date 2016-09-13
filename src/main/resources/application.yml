@@ -1,0 +1,5 @@
+ml:
+  host: localhost
+  port: 8002
+  uid: admin
+  pw: admin
