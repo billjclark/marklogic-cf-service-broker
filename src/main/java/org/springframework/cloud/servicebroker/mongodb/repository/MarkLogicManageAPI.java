@@ -12,4 +12,8 @@ public interface MarkLogicManageAPI {
 
     @RequestLine("POST /manage/v2/databases")
     public String createDatabase(@RequestBody Map<String, String> m);
+
+    @RequestLine("POST /manage/v2/forests")
+    public String createForest(@RequestBody Map<String, String> m);
+
 }

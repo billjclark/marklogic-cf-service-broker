@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceDoesNotExistException;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceExistsException;
 import org.springframework.cloud.servicebroker.model.*;
-import org.springframework.cloud.servicebroker.mongodb.exception.MongoServiceException;
+import org.springframework.cloud.servicebroker.mongodb.exception.MLServiceException;
 import org.springframework.cloud.servicebroker.mongodb.model.ServiceInstance;
 import org.springframework.cloud.servicebroker.mongodb.repository.MarkLogicManageAPI;
 import org.springframework.cloud.servicebroker.mongodb.repository.ServiceInstanceRepository;
@@ -32,10 +32,47 @@ public class MarkLogicServiceInstanceService implements ServiceInstanceService {
 
         instance = new ServiceInstance(request);
 
-        //TODO create content and modules DBs
+        // create content DB
         Map<String, String> m = new HashMap<>();
         m.put("database-name", request.getServiceInstanceId() + "-content");
         markLogicManageAPI.createDatabase(m);
+
+        repository.save(instance);
+
+        m.clear();
+
+        // Create the modules DB
+
+        instance = new ServiceInstance(request);
+
+        m.put("database-name", request.getServiceInstanceId() + "-modules");
+        markLogicManageDatabasesAPI.createDatabase(m);
+
+        repository.save(instance);
+
+        m.clear();
+
+        // Create the forests
+
+        instance = new ServiceInstance(request);
+
+        m.put("forest-name", request.getServiceInstanceId() + "-content-001-1");
+        m.put("host", host);
+        m.put("database", request.getServiceInstanceId() + "-content");
+
+        markLogicManageAPI.createForest(m);
+
+        repository.save(instance);
+
+        m.clear();
+
+        instance = new ServiceInstance(request);
+
+        m.put("forest-name", request.getServiceInstanceId() + "-modules-001-1");
+        m.put("host", host);
+        m.put("database", request.getServiceInstanceId() + "-modules");
+
+        markLogicManageAPI.createForest(m);
 
         repository.save(instance);
 
@@ -52,7 +89,7 @@ public class MarkLogicServiceInstanceService implements ServiceInstanceService {
     }
 
     @Override
-    public DeleteServiceInstanceResponse deleteServiceInstance(DeleteServiceInstanceRequest request) throws MongoServiceException {
+    public DeleteServiceInstanceResponse deleteServiceInstance(DeleteServiceInstanceRequest request) throws MLServiceException {
         String instanceId = request.getServiceInstanceId();
         ServiceInstance instance = repository.findOne(instanceId);
         if (instance == null) {
