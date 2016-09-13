@@ -9,8 +9,8 @@ import javax.activation.DataSource;
 @SpringBootApplication
 public class Application {
 
-	@Autowired
-	private DataSource dataSource;
+	/*@Autowired
+	private DataSource dataSource;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);

@@ -65,6 +65,13 @@
             <artifactId>feign-core</artifactId>
             <version>8.16.2</version>
         </dependency>
+        <dependency>
+            <groupid>hsqldb</groupId>
+            <artifactid>hsqldb</artifactId>
+            <version>1.8.0.10</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>

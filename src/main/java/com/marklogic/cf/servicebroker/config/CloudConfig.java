@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Value;
 import com.marklogic.cf.servicebroker.repository.MarkLogicManageAPI;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 
+@Profile("cloud")
 @Configuration
-public class Config {
+public class CloudConfig {
 
     @Value("${ml.host:localhost}")
     private String host;

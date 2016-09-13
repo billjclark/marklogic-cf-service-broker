@@ -1,18 +1,18 @@
 package com.marklogic.cf.servicebroker.model;
 
+import javax.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- * A binding to a service instance
- *
- * @author sgreenberg@pivotal.io
- */
+@Entity
+@Table(name = "service_instance_binding")
 public class ServiceInstanceBinding {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String serviceInstanceId;
-	private Map<String,Object> credentials = new HashMap<>();
+	//private Map<String,Object> credentials = new HashMap<>();
 	private String syslogDrainUrl;
 	private String appGuid;
 
@@ -22,7 +22,7 @@ public class ServiceInstanceBinding {
 								  String syslogDrainUrl, String appGuid) {
 		this.id = id;
 		this.serviceInstanceId = serviceInstanceId;
-		setCredentials(credentials);
+		//setCredentials(credentials);
 		this.syslogDrainUrl = syslogDrainUrl;
 		this.appGuid = appGuid;
 	}
@@ -35,17 +35,17 @@ public class ServiceInstanceBinding {
 		return serviceInstanceId;
 	}
 
-	public Map<String, Object> getCredentials() {
-		return credentials;
-	}
+//	public Map<String, Object> getCredentials() {
+//		return credentials;
+//	}
 
-	private void setCredentials(Map<String, Object> credentials) {
-		if (credentials == null) {
-			this.credentials = new HashMap<>();
-		} else {
-			this.credentials = credentials;
-		}
-	}
+//	private void setCredentials(Map<String, Object> credentials) {
+//		if (credentials == null) {
+//			this.credentials = new HashMap<>();
+//		} else {
+//			this.credentials = credentials;
+//		}
+//	}
 
 	public String getSyslogDrainUrl() {
 		return syslogDrainUrl;

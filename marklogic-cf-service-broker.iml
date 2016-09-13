@@ -139,5 +139,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework.cloud:spring-cloud-cloudfoundry-service-broker:tests:1.0.0.RC3" level="project" />
     <orderEntry type="library" name="Maven: com.netflix.feign:feign-core:8.16.2" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.jvnet:animal-sniffer-annotation:1.0" level="project" />
+    <orderEntry type="library" name="Maven: com.h2database:h2:1.4.191" level="project" />
   </component>
 </module>
