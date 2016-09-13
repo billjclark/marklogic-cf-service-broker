@@ -11,7 +11,12 @@ import org.springframework.context.annotation.Configuration;
 public class Config {
 
     @Value("${ml.host:localhost}")
-    public String host;
+    private String host;
+
+    @Bean
+    public String host() {
+        return host;
+    }
 
     @Value("${ml.port:8002}")
     private int port;
