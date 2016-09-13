@@ -10,9 +10,11 @@ import java.util.Map;
 @Repository
 public interface MarkLogicManageAPI {
 
+    @Headers("Content-Type: application/json")
     @RequestLine("POST /manage/v2/databases")
     public String createDatabase(@RequestBody Map<String, String> m);
 
+    @Headers("Content-Type: application/json")
     @RequestLine("POST /manage/v2/forests")
     public String createForest(@RequestBody Map<String, String> m);
 

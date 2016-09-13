@@ -4,6 +4,8 @@ import com.marklogic.cf.servicebroker.model.ServiceInstance;
 import com.marklogic.cf.servicebroker.repository.MarkLogicManageAPI;
 import feign.Feign;
 import feign.auth.BasicAuthRequestInterceptor;
+import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
 import org.hibernate.dialect.MySQL5Dialect;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,7 +30,7 @@ public class Config {
         return host;
     }
 
-    @Value("${ml.port:8002}")
+    @Value("${ml.port:4444}")
     private int port;
 
     @Value("${ml.uid:admin}")
@@ -41,6 +43,7 @@ public class Config {
     public MarkLogicManageAPI markLogicManageAPI() {
         return Feign
                 .builder()
+                .encoder(new GsonEncoder()).decoder(new GsonDecoder())
                 .requestInterceptor(new BasicAuthRequestInterceptor(uid, pw))
                 .target(MarkLogicManageAPI.class,
                         "http://" + host + ":" + port);
