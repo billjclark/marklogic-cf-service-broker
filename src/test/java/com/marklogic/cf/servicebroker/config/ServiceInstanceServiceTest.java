@@ -4,11 +4,12 @@ import com.marklogic.cf.servicebroker.Application;
 import com.marklogic.cf.servicebroker.model.ServiceInstance;
 import com.marklogic.cf.servicebroker.repository.MarkLogicManageAPI;
 import com.marklogic.cf.servicebroker.repository.ServiceInstanceRepository;
-import org.junit.Ignore;
+import com.marklogic.cf.servicebroker.service.MarkLogicServiceInstanceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.servicebroker.model.CreateServiceInstanceRequest;
+import org.springframework.cloud.servicebroker.model.CreateServiceInstanceResponse;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -23,10 +24,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {Application.class})
 @WebAppConfiguration
-public class CreateDBTest {
+public class ServiceInstanceServiceTest {
 
     @Autowired
-    private MarkLogicManageAPI markLogicManageAPI;
+    private MarkLogicServiceInstanceService markLogicServiceInstanceService;
 
     @Autowired
     private ServiceInstanceRepository repo;
@@ -34,15 +35,21 @@ public class CreateDBTest {
 
     @Test
     //@Ignore
-    public void testCreateDB() throws Exception {
+    public void testCreateServiceInstance() throws Exception {
 
-        // create content DB
-        Map<String, String> m = new HashMap<>();
-        m.put("database-name", "5736-fjgd-47563" + "-content");
-        markLogicManageAPI.createDatabase(m);
+        // create Service Instance
 
-        String dbcreate = markLogicManageAPI.createDatabase(m);
-        assertNull(dbcreate);
+        Map<String, Object> m = new HashMap<>();
+        m.put("param1", "value1");
+        m.put("param2", "value2");
+        m.put("param3", "value3");
+
+        CreateServiceInstanceRequest request = new CreateServiceInstanceRequest("serviceDefinitionId", "planId", "organizationGuid", "spaceGuid", m);
+
+        CreateServiceInstanceResponse serviceInstanceCreate = markLogicServiceInstanceService.createServiceInstance(request.withServiceInstanceId("abcde"));
+
+        assertNotNull(serviceInstanceCreate);
+
     }
 
     @Test

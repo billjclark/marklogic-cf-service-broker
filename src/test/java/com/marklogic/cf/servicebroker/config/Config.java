@@ -22,12 +22,20 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    @Value("${ml.host:centos-1.westus.cloudapp.azure.com}")
+    @Value("${ml.host:localhost}")
     private String host;
 
     @Bean
     public String host() {
         return host;
+    }
+
+    @Value("${ml.clusterName:toms-macbook-pro.local}")
+    private String clusterName;
+
+    @Bean
+    public String clusterName() {
+        return clusterName;
     }
 
     @Value("${ml.port:8002}")

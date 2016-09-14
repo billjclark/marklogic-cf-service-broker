@@ -15,7 +15,15 @@ public interface MarkLogicManageAPI {
     public String createDatabase(@RequestBody Map<String, String> m);
 
     @Headers("Content-Type: application/json")
+    @RequestLine("DELETE /manage/v2/databases")
+    public String deleteDatabase(@RequestBody Map<String, String> m);
+
+    @Headers("Content-Type: application/json")
     @RequestLine("POST /manage/v2/forests")
     public String createForest(@RequestBody Map<String, String> m);
+
+    @Headers("Content-Type: application/json")
+    @RequestLine("DELETE /manage/v2/forests/")
+    public String deleteForest(@RequestBody Map<String, String> m);
 
 }
