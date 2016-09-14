@@ -26,4 +26,7 @@ public interface MarkLogicManageAPI {
     @RequestLine("DELETE /manage/v2/forests/")
     public String deleteForest(@RequestBody Map<String, String> m);
 
+//    @RequestLine("GET /yql?q={query}&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
+//    public Quote getQuote(@Param("query") String query);
+
 }

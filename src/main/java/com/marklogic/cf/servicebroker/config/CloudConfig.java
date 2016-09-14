@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Profile;
 @Configuration
 public class CloudConfig {
 
-    @Value("${ml.host:localhost}")
+    @Value("${ml.host:financial.demo.marklogic.com}")
     private String host;
 
     @Bean
@@ -23,10 +23,10 @@ public class CloudConfig {
     @Value("${ml.port:8002}")
     private int port;
 
-    @Value("${ml.uid:admin}")
+    @Value("${ml.uid:tom}")
     private String uid;
 
-    @Value("${ml.pw:admin}")
+    @Value("${ml.pw:tom}")
     private String pw;
 
     @Bean
