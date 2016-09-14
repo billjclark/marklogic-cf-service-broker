@@ -17,7 +17,6 @@ public class ServiceInstance {
     @JsonSerialize
     @JsonProperty("service_instance_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
 
     @JsonSerialize

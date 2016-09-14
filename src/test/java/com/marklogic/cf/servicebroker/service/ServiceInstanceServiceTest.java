@@ -1,8 +1,14 @@
 package com.marklogic.cf.servicebroker.service;
 
 import com.marklogic.cf.servicebroker.IntegrationTestBase;
+import org.junit.Test;
 
 public class ServiceInstanceServiceTest extends IntegrationTestBase {
+
+    @Test
+    public void testIt() {
+        return;
+    }
 
 //	private static final String SVC_DEF_ID = "serviceDefinitionId";
 //	private static final String SVC_PLAN_ID = "servicePlanId";

@@ -22,7 +22,7 @@ import java.util.Map;
 @Configuration
 public class Config {
 
-    @Value("${ml.host:localhost}")
+    @Value("${ml.host:centos-1.westus.cloudapp.azure.com}")
     private String host;
 
     @Bean
@@ -30,7 +30,7 @@ public class Config {
         return host;
     }
 
-    @Value("${ml.port:4444}")
+    @Value("${ml.port:8002}")
     private int port;
 
     @Value("${ml.uid:admin}")
