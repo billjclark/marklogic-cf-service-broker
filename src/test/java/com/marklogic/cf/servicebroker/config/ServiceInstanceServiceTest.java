@@ -47,6 +47,8 @@ public class ServiceInstanceServiceTest {
 
         CreateServiceInstanceResponse serviceInstanceCreate = markLogicServiceInstanceService.createServiceInstance(request.withServiceInstanceId("abcde"));
 
+        // TODO figure out why values are not being stored correctly.
+
         assertNotNull(serviceInstanceCreate);
 
 //        DeleteServiceInstanceRequest deleteRequest = new DeleteServiceInstanceRequest(request.getServiceInstanceId(), request.getServiceDefinitionId(),
