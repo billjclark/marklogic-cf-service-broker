@@ -8,8 +8,7 @@ import com.marklogic.cf.servicebroker.service.MarkLogicServiceInstanceService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.servicebroker.model.CreateServiceInstanceRequest;
-import org.springframework.cloud.servicebroker.model.CreateServiceInstanceResponse;
+import org.springframework.cloud.servicebroker.model.*;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -49,6 +48,13 @@ public class ServiceInstanceServiceTest {
         CreateServiceInstanceResponse serviceInstanceCreate = markLogicServiceInstanceService.createServiceInstance(request.withServiceInstanceId("abcde"));
 
         assertNotNull(serviceInstanceCreate);
+
+//        DeleteServiceInstanceRequest deleteRequest = new DeleteServiceInstanceRequest(request.getServiceInstanceId(), request.getServiceDefinitionId(),
+//                request.getPlanId(), request.getServiceDefinition(), request.isAsyncAccepted());
+//
+//        DeleteServiceInstanceResponse serviceInstanceDelete = markLogicServiceInstanceService.deleteServiceInstance(deleteRequest);
+//
+//        assertNotNull(serviceInstanceDelete);
 
     }
 

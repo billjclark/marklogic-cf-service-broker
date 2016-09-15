@@ -1,9 +1,12 @@
 package com.marklogic.cf.servicebroker.service;
 
+import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import com.marklogic.cf.servicebroker.repository.MarkLogicManageAPI;
 import com.marklogic.cf.servicebroker.repository.ServiceInstanceBindingRepository;
+import com.marklogic.cf.servicebroker.repository.ServiceInstanceRepository;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceBindingDoesNotExistException;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceBindingExistsException;
 import org.springframework.cloud.servicebroker.model.CreateServiceInstanceAppBindingResponse;
@@ -18,8 +21,14 @@ import org.springframework.stereotype.Service;
 @Service
 public class MarkLogicServiceInstanceBindingService implements ServiceInstanceBindingService {
 
+	//@Autowired
+	//private MarkLogicManageAPI admin;
+
 	@Autowired
-	private MarkLogicManageAPI admin;
+	private MarkLogicManageAPI markLogicManageAPI;
+
+	@Autowired
+	private ServiceInstanceRepository repository;
 
 	private ServiceInstanceBindingRepository bindingRepository;
 	
@@ -34,8 +43,31 @@ public class MarkLogicServiceInstanceBindingService implements ServiceInstanceBi
 			throw new ServiceInstanceBindingExistsException(serviceInstanceId, bindingId);
 		}
 
-		//TODO create the binding via API...
+		//TODO create the binding via API... Create Roles, Users with those roles and passwords.
+
+		//create role in Security DB
+		Map<String, String> m = new HashMap<>();
+		m.put("role-name", request.getServiceInstanceId() + "-admin-role");
+		markLogicManageAPI.createRole(m);
+
+		m.clear();
+
+		String pw = UUID.randomUUID().toString();
+
+		//create user in Security DB
+		m.put("user-name", request.getServiceInstanceId() + "-admin");
+		m.put("password", pw);
+		m.put("description", request.getServiceInstanceId() + " admin user");
+		m.put("role", "[" + request.getServiceInstanceId() + "-admin-role]");
+		markLogicManageAPI.createRole(m);
+
+		//m.clear();
+
+		//TODO Put together the VCAP_Services-type variables that are needed. Maybe use the java connection library later.
+
 		Map<String, Object> credentials = null;
+		credentials.put("username",request.getServiceInstanceId() + "-admin");
+		credentials.put("password",pw);
 		binding = new ServiceInstanceBinding(bindingId, serviceInstanceId, credentials, null, request.getBoundAppGuid());
 		bindingRepository.save(binding);
 		

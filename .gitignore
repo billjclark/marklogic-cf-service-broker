@@ -2,3 +2,4 @@
 target/
 product/
 release/
+src/main/java/com/marklogic/cf/servicebroker/config/CloudConfig.java

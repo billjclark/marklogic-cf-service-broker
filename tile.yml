@@ -4,7 +4,7 @@
 #
 name: marklogic-cf-service-broker # By convention lowercase with dashes
 icon_file: resources/icon.png
-label: MarkLogic Tile Starter
+label: MarkLogic Service Broker
 description: This Tile will provision Content Database and Module Database with a Forest attached for each on a MarkLogic Node.
 
 # Global defaults (all optional)
@@ -40,10 +40,10 @@ packages:
 # strongly recommend you leave this alone so that your tile always
 # runs with the latest stemcell.
 #
-# stemcell_criteria:
-#   os: ubuntu-trusty
-#   requires_cpi: false
-#   version: '3062'
+stemcell_criteria:
+ os: ubuntu-trusty
+ requires_cpi: false
+ version: '3262'
 
 # Add properties you want to pass to your applications.
 # Properties specified here will not be configurable by the user.

@@ -2,6 +2,7 @@ package com.marklogic.cf.servicebroker.repository;
 
 import feign.Headers;
 import feign.RequestLine;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,19 +15,25 @@ public interface MarkLogicManageAPI {
     @RequestLine("POST /manage/v2/databases")
     public String createDatabase(@RequestBody Map<String, String> m);
 
-    @Headers("Content-Type: application/json")
-    @RequestLine("DELETE /manage/v2/databases")
-    public String deleteDatabase(@RequestBody Map<String, String> m);
+//    @Headers("Content-Type: application/json")
+//    @RequestLine("DELETE /manage/v2/databases/{databaseName}")
+//    public void deleteDatabase(@Param("databaseName") String query);
 
     @Headers("Content-Type: application/json")
     @RequestLine("POST /manage/v2/forests")
     public String createForest(@RequestBody Map<String, String> m);
 
-    @Headers("Content-Type: application/json")
-    @RequestLine("DELETE /manage/v2/forests/")
-    public String deleteForest(@RequestBody Map<String, String> m);
+//    @Headers("Content-Type: application/json")
+//    @RequestLine("DELETE /manage/v2/forests/{forestName}?level=full")
+//    public void deleteForest(@Param("forestName") String query);
 
-//    @RequestLine("GET /yql?q={query}&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys")
-//    public Quote getQuote(@Param("query") String query);
+    @Headers("Content-Type: application/json")
+    @RequestLine("POST /manage/v2/roles")
+    public String createRole(@RequestBody Map<String, String> m);
+
+    @Headers("Content-Type: application/json")
+    @RequestLine("POST /manage/v2/users")
+    public String createUser(@RequestBody Map<String, String> m);
+
 
 }

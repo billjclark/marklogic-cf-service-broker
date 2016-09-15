@@ -1,6 +1,7 @@
 ---
 applications:
-- name: ml-broker
+- name: marklogic-cf-service-broker-app
   memory: 1G
   instances: 1
-  path: target/service-broker.jar
+  path: target/marklogic-cf-service-broker-0.0.1.jar
+  buildpack: java_buildpack_offline

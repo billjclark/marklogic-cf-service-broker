@@ -17,13 +17,13 @@ class CatalogService {
         return new Catalog(Collections.singletonList(
                 new ServiceDefinition(
                         "marklogic-service-broker",
-                        "MarkLogic DB",
+                        "MarkLogicDB",
                         "A simple MarkLogic service broker implementation",
                         true,
                         false,
                         Collections.singletonList(
                                 new Plan("demo-plan",
-                                        "Default MarkLogic Plan",
+                                        "DefaultMarkLogicPlan",
                                         "This is a demo plan.",
                                         getPlanMetadata())),
                         Arrays.asList("marklogic", "document"),

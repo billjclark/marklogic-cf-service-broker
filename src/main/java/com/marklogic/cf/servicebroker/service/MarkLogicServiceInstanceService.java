@@ -105,36 +105,34 @@ public class MarkLogicServiceInstanceService implements ServiceInstanceService {
         //Don't think we need this since it already exists.
         //instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
 
-        Map<String, String> m = new HashMap<>();
+        //Map<String, String> m = new HashMap<>();
 
         // delete content DB
-        m.put("database-name", request.getServiceInstanceId() + "-content");
-        markLogicManageAPI.deleteDatabase(m);
+//        String databaseDelete = "database-name" + request.getServiceInstanceId() + "-content";
+//        markLogicManageAPI.deleteDatabase(databaseDelete);
+//
+//        repository.delete(instanceId);
+//
+//        // delete modules DB
+//        databaseDelete = "database-name" + request.getServiceInstanceId() + "-modules";
+//        markLogicManageAPI.deleteDatabase(databaseDelete);
+//
+//        repository.delete(instanceId);
+//
+//        // delete content Forest
+//        String forestDelete = "forest-name" + request.getServiceInstanceId() + "-content-001-1";
+//
+//        markLogicManageAPI.deleteForest(forestDelete);
+//
+//        repository.delete(instanceId);
+//
+//        //delete modules Forest
+//        forestDelete = "forest-name" + request.getServiceInstanceId() + "-modules-001-1";
+//
+//        markLogicManageAPI.deleteForest(forestDelete);
 
         repository.delete(instanceId);
 
-        // delete modules DB
-        m.clear();
-        m.put("database-name", request.getServiceInstanceId() + "-modules");
-        markLogicManageAPI.deleteDatabase(m);
-
-        repository.delete(instanceId);
-
-        m.clear();
-
-        // delete content Forest
-        String forestDelete = "-content-001-1" + "test";
-
-
-//        $ curl --anyauth --user user:password -X DELETE -i \
-//        http://localhost:8002/manage/v2/forests/example?level=full
-
-        //m.clear();
-
-
-
-
-        repository.delete(instanceId);
         return new DeleteServiceInstanceResponse();
     }
 
