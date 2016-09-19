@@ -1,5 +1,6 @@
 package com.marklogic.cf.servicebroker.service;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceDoesNotExistException;
 import org.springframework.cloud.servicebroker.exception.ServiceInstanceExistsException;
@@ -15,6 +16,8 @@ import java.util.Map;
 @Service
 public class MarkLogicServiceInstanceService implements ServiceInstanceService {
 
+    private static final Logger LOG = Logger.getLogger(MarkLogicServiceInstanceService.class);
+
     @Autowired
     private MarkLogicManageAPI markLogicManageAPI;
 
@@ -29,6 +32,8 @@ public class MarkLogicServiceInstanceService implements ServiceInstanceService {
 
     @Override
     public CreateServiceInstanceResponse createServiceInstance(CreateServiceInstanceRequest request) {
+        LOG.info("creating instance with id: " + request.getServiceInstanceId());
+
         com.marklogic.cf.servicebroker.model.ServiceInstance instance = repository.findOne(request.getServiceInstanceId());
         if (instance != null) {
             throw new ServiceInstanceExistsException(request.getServiceInstanceId(), request.getServiceDefinitionId());
@@ -39,45 +44,52 @@ public class MarkLogicServiceInstanceService implements ServiceInstanceService {
         // create content DB
         Map<String, String> m = new HashMap<>();
         m.put("database-name", request.getServiceInstanceId() + "-content");
+
+        LOG.info("creating content database");
         markLogicManageAPI.createDatabase(m);
 
-        repository.save(instance);
+       // repository.save(instance);
 
         m.clear();
 
         // Create the modules DB
 
-        instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
+        //instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
 
         m.put("database-name", request.getServiceInstanceId() + "-modules");
+
+        LOG.info("creating modules database");
         markLogicManageAPI.createDatabase(m);
 
-        repository.save(instance);
+       // repository.save(instance);
 
         m.clear();
 
         // Create the forests
 
-        instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
+        //instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
 
         m.put("forest-name", request.getServiceInstanceId() + "-content-001-1");
         m.put("host", clusterName);
         m.put("database", request.getServiceInstanceId() + "-content");
 
+        LOG.info("creating content forrest");
         markLogicManageAPI.createForest(m);
 
-        repository.save(instance);
+      ///  repository.save(instance);
 
         m.clear();
 
-        instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
+       // instance = new com.marklogic.cf.servicebroker.model.ServiceInstance(request);
 
         m.put("forest-name", request.getServiceInstanceId() + "-modules-001-1");
         m.put("host", clusterName);
         m.put("database", request.getServiceInstanceId() + "-modules");
 
+        LOG.info("creating modules forrest");
         markLogicManageAPI.createForest(m);
 
+        LOG.info("saving instance");
         repository.save(instance);
 
         return new CreateServiceInstanceResponse();

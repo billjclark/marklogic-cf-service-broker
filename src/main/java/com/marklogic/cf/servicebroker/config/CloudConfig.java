@@ -26,7 +26,7 @@ public class CloudConfig {
     @Value("${ml.uid:tom}")
     private String uid;
 
-    @Value("${ml.pw:tom}")
+    @Value("${ml.pw:admin}")
     private String pw;
 
     @Bean
