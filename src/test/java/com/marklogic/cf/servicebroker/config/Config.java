@@ -57,32 +57,32 @@ public class Config {
                         "http://" + host + ":" + port);
     }
 
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
-            DataSource dataSource) {
-        return createEntityManagerFactoryBean(dataSource,
-                MySQL5Dialect.class.getName());
-    }
+//    @Bean(name = "entityManagerFactory")
+//    public LocalContainerEntityManagerFactoryBean entityManagerFactory(
+//            DataSource dataSource) {
+//        return createEntityManagerFactoryBean(dataSource,
+//                MySQL5Dialect.class.getName());
+//    }
 
-    @Bean(name = "transactionManager")
-    public JpaTransactionManager transactionManager(
-            EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
+//    @Bean(name = "transactionManager")
+//    public JpaTransactionManager transactionManager(
+//            EntityManagerFactory entityManagerFactory) {
+//        return new JpaTransactionManager(entityManagerFactory);
+//    }
 
-    protected LocalContainerEntityManagerFactoryBean createEntityManagerFactoryBean(
-            DataSource dataSource, String dialectClassName) {
-        Map<String, String> properties = new HashMap<String, String>();
-        properties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "update");
-        properties.put(org.hibernate.cfg.Environment.DIALECT, dialectClassName);
-        properties.put(org.hibernate.cfg.Environment.SHOW_SQL, "true");
-
-        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
-        em.setDataSource(dataSource);
-        em.setPackagesToScan(ServiceInstance.class.getPackage().getName());
-        em.setPersistenceProvider(new HibernatePersistenceProvider());
-        em.setJpaPropertyMap(properties);
-        return em;
-    }
+//    protected LocalContainerEntityManagerFactoryBean createEntityManagerFactoryBean(
+//            DataSource dataSource, String dialectClassName) {
+//        Map<String, String> properties = new HashMap<String, String>();
+//        properties.put(org.hibernate.cfg.Environment.HBM2DDL_AUTO, "update");
+//        properties.put(org.hibernate.cfg.Environment.DIALECT, dialectClassName);
+//        properties.put(org.hibernate.cfg.Environment.SHOW_SQL, "true");
+//
+//        LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+//        em.setDataSource(dataSource);
+//        em.setPackagesToScan(ServiceInstance.class.getPackage().getName());
+//        em.setPersistenceProvider(new HibernatePersistenceProvider());
+//        em.setJpaPropertyMap(properties);
+//        return em;
+//    }
 
 }

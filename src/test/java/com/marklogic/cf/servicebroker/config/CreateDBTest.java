@@ -64,20 +64,7 @@ public class CreateDBTest {
     }
 
     @Test
-    @Ignore
-    public void testCreateDB() throws Exception {
-
-        // create content DB
-        Map<String, String> m = new HashMap<>();
-        m.put("database-name", "5736-fjgd-47563" + "-content");
-        markLogicManageAPI.createDatabase(m);
-
-        String dbcreate = markLogicManageAPI.createDatabase(m);
-        assertNull(dbcreate);
-    }
-
-    @Test
-    public void testIt() {
+    public void testMySQLCredsStore() {
         Map<String, Object> m = new HashMap<>();
         m.put("param1", "value1");
         m.put("param2", "value2");
