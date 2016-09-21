@@ -1,9 +1,8 @@
 package com.marklogic.cf.servicebroker.service;
 
-import com.marklogic.cf.servicebroker.IntegrationTestBase;
 import org.junit.Test;
 
-public class ServiceInstanceServiceTest extends IntegrationTestBase {
+public class ServiceInstanceServiceTest {
 
     @Test
     public void testIt() {

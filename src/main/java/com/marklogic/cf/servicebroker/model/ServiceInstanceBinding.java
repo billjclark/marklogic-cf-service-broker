@@ -9,7 +9,6 @@ import java.util.Map;
 public class ServiceInstanceBinding {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String id;
 	private String serviceInstanceId;
 	//private Map<String,Object> credentials = new HashMap<>();
